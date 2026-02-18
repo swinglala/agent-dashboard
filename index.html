@@ -800,6 +800,96 @@
             justify-content: flex-end;
             gap: 10px;
         }
+        
+        /* Document Preview */
+        .doc-preview {
+            font-size: 14px;
+            line-height: 1.8;
+            color: #e0e0e0;
+        }
+        
+        .doc-preview h1 {
+            font-size: 24px;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid rgba(102, 126, 234, 0.5);
+        }
+        
+        .doc-preview h2 {
+            font-size: 20px;
+            margin: 25px 0 15px 0;
+            color: #a5b4fc;
+        }
+        
+        .doc-preview h3 {
+            font-size: 16px;
+            margin: 20px 0 10px 0;
+            color: #c4b5fd;
+        }
+        
+        .doc-preview p {
+            margin-bottom: 12px;
+        }
+        
+        .doc-preview blockquote {
+            border-left: 3px solid #667eea;
+            padding-left: 15px;
+            margin: 15px 0;
+            color: #a0a0a0;
+            font-style: italic;
+        }
+        
+        .doc-preview ul, .doc-preview ol {
+            margin: 10px 0 10px 20px;
+        }
+        
+        .doc-preview li {
+            margin-bottom: 6px;
+        }
+        
+        .doc-preview table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+        }
+        
+        .doc-preview th, .doc-preview td {
+            border: 1px solid rgba(255,255,255,0.1);
+            padding: 10px;
+            text-align: left;
+        }
+        
+        .doc-preview th {
+            background: rgba(102, 126, 234, 0.2);
+        }
+        
+        .doc-preview code {
+            background: rgba(0,0,0,0.3);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: 'Monaco', 'Consolas', monospace;
+            font-size: 13px;
+        }
+        
+        .doc-preview pre {
+            background: rgba(0,0,0,0.3);
+            padding: 15px;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin: 15px 0;
+        }
+        
+        .doc-preview hr {
+            border: none;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            margin: 20px 0;
+        }
+        
+        .doc-preview .highlight {
+            background: rgba(102, 126, 234, 0.2);
+            padding: 2px 6px;
+            border-radius: 4px;
+        }
     </style>
 </head>
 <body>
@@ -1078,7 +1168,7 @@
                     </div>
                     
                     <div class="docs-grid">
-                        <div class="doc-card">
+                        <div class="doc-card" onclick="showDocModal('research')">
                             <div class="doc-card-header">
                                 <div class="doc-icon md">📄</div>
                                 <div class="doc-info">
@@ -1095,7 +1185,7 @@
                             </div>
                         </div>
                         
-                        <div class="doc-card">
+                        <div class="doc-card" onclick="showDocModal('blog')">
                             <div class="doc-card-header">
                                 <div class="doc-icon md">📄</div>
                                 <div class="doc-info">
@@ -1112,7 +1202,7 @@
                             </div>
                         </div>
                         
-                        <div class="doc-card">
+                        <div class="doc-card" onclick="showDocModal('cardnews')">
                             <div class="doc-card-header">
                                 <div class="doc-icon md">📄</div>
                                 <div class="doc-info">
@@ -1275,6 +1365,23 @@
         </div>
     </div>
     
+    <!-- Document Preview Modal -->
+    <div class="modal-overlay" id="docModal">
+        <div class="modal" style="width: 800px; max-width: 90vw;">
+            <div class="modal-header">
+                <h2 id="docModalTitle">📄 문서 미리보기</h2>
+                <button class="modal-close" onclick="closeModal('docModal')">&times;</button>
+            </div>
+            <div class="modal-body" style="max-height: 70vh; overflow-y: auto;">
+                <div id="docModalContent" class="doc-preview"></div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" onclick="closeModal('docModal')">닫기</button>
+                <button class="btn btn-primary" onclick="copyDocContent()">📋 복사</button>
+            </div>
+        </div>
+    </div>
+    
     <!-- New Issue Modal -->
     <div class="modal-overlay" id="newIssueModal">
         <div class="modal">
@@ -1400,6 +1507,248 @@
                 }
             });
         });
+        
+        // Document contents
+        const documents = {
+            research: {
+                title: '📚 리서치 결과: 설 연휴 후유증 극복 책 추천',
+                content: `
+                    <h1>📚 리서치 결과: 설 연휴 후유증 극복 책 추천</h1>
+                    <p><strong>리서처:</strong> Researcher Agent<br>
+                    <strong>날짜:</strong> 2026-02-18<br>
+                    <strong>주제:</strong> 설 연휴 후 읽기 좋은 책 (소설/비소설)</p>
+                    <hr>
+                    
+                    <h2>🔍 검색 키워드</h2>
+                    <ul>
+                        <li>2025-2026 베스트셀러</li>
+                        <li>한강, 김영하, 김애란 신작</li>
+                        <li>자기계발서 힐링 추천</li>
+                    </ul>
+                    
+                    <h2>📊 트렌드 분석</h2>
+                    <h3>2025-2026 출판 트렌드</h3>
+                    <ol>
+                        <li><strong>한강 효과</strong> - 노벨문학상 이후 한국 소설 세계적 주목</li>
+                        <li><strong>에세이 강세</strong> - 김영하 『단 한 번의 삶』 등</li>
+                        <li><strong>실용적 자기계발</strong> - 습관, 루틴 중심</li>
+                    </ol>
+                    <hr>
+                    
+                    <h2>📖 소설 추천 (마음의 휴식)</h2>
+                    <table>
+                        <tr><th>순위</th><th>제목</th><th>저자</th><th>포인트</th></tr>
+                        <tr><td>1</td><td>소년이 온다</td><td>한강</td><td>노벨문학상 수상작, 21주 연속 베스트셀러</td></tr>
+                        <tr><td>2</td><td>안녕이라 그랬어</td><td>김애란</td><td>2025 소설가 50인이 뽑은 올해의 소설 1위</td></tr>
+                        <tr><td>3</td><td>괴테는 모든 것을 말했다</td><td>스즈키 유이</td><td>2025 아쿠타가와상 수상작</td></tr>
+                        <tr><td>4</td><td>절창</td><td>구병모</td><td>신작 장편소설, 2026 주목</td></tr>
+                        <tr><td>5</td><td>불편한 편의점</td><td>김호연</td><td>힐링 소설 스테디셀러</td></tr>
+                    </table>
+                    
+                    <h2>📘 비소설 추천 (동기부여/리프레시)</h2>
+                    <table>
+                        <tr><th>순위</th><th>제목</th><th>저자</th><th>포인트</th></tr>
+                        <tr><td>1</td><td>거인의 노트</td><td>김익한</td><td>기록학자의 스테디셀러</td></tr>
+                        <tr><td>2</td><td>단 한 번의 삶</td><td>김영하</td><td>주요 서점 1위, 세대 공감 에세이</td></tr>
+                        <tr><td>3</td><td>그릿(Grit)</td><td>앤절라 더크워스</td><td>끈기의 힘, 새해 목표 리마인드</td></tr>
+                        <tr><td>4</td><td>트렌드 코리아 2026</td><td>김난도</td><td>올해 트렌드 파악</td></tr>
+                        <tr><td>5</td><td>요리를 한다는 것</td><td>최강록</td><td>일상 힐링 에세이</td></tr>
+                    </table>
+                    <hr>
+                    
+                    <h2>💡 콘텐츠 방향 제안</h2>
+                    <blockquote>"설 연휴가 끝나고 무기력하다면, 책 한 권으로 리셋하세요"</blockquote>
+                    <p><strong>타겟:</strong> 직장인 (일상 복귀 스트레스), 20-40대 (자기계발 관심)<br>
+                    <strong>톤:</strong> 공감 + 추천 (강요 X), "이 중 하나만 읽어도 충분해요" 느낌</p>
+                `
+            },
+            blog: {
+                title: '📝 블로그: 설 연휴 끝, 무기력할 때 읽으면 좋은 책 10권',
+                content: `
+                    <h1>설 연휴 끝, 무기력할 때 읽으면 좋은 책 10권 📚</h1>
+                    <blockquote>명절 후유증으로 아무것도 하기 싫다면, 책 한 권으로 부드럽게 리셋해보세요.</blockquote>
+                    <hr>
+                    
+                    <p>설 연휴가 끝났습니다.</p>
+                    <p>친척들 사이에서 살아남았고, 귀경길 정체도 버텼고, 이제 다시 일상으로... 근데 몸이 안 움직이죠?</p>
+                    <p><strong>괜찮아요. 다 그래요.</strong></p>
+                    <p>오늘은 설 연휴 후유증에 딱 맞는 책 10권을 소설과 비소설로 나눠서 추천해드릴게요.</p>
+                    <hr>
+                    
+                    <h2>📖 소설 5권 — 마음의 휴식이 필요할 때</h2>
+                    
+                    <h3>1. 『소년이 온다』 — 한강</h3>
+                    <p>2024년 노벨문학상 수상 이후, 2025년 내내 베스트셀러 1위를 지킨 작품.</p>
+                    <p>무겁지만, 읽고 나면 이상하게 마음이 정화되는 책입니다.</p>
+                    <blockquote>💡 <strong>이런 분께:</strong> 요즘 사소한 일에 예민해졌다면</blockquote>
+                    
+                    <h3>2. 『안녕이라 그랬어』 — 김애란</h3>
+                    <p>2025년 소설가 50인이 뽑은 올해의 소설 <strong>1위</strong>.</p>
+                    <p>김애란 특유의 따뜻하고 섬세한 문장이 지친 마음을 어루만져 줍니다.</p>
+                    <blockquote>💡 <strong>이런 분께:</strong> 긴 책은 부담스럽고, 짧지만 깊은 게 좋다면</blockquote>
+                    
+                    <h3>3. 『괴테는 모든 것을 말했다』 — 스즈키 유이</h3>
+                    <p>2025년 <strong>아쿠타가와상</strong> 수상작. 일본 문학 특유의 잔잔함이 있어요.</p>
+                    <blockquote>💡 <strong>이런 분께:</strong> 일본 소설 좋아하고, 잔잔한 거 찾는 분</blockquote>
+                    
+                    <h3>4. 『절창』 — 구병모</h3>
+                    <p>2026년 주목할 신작 장편소설. 구병모 작가의 팬이라면 필독.</p>
+                    <blockquote>💡 <strong>이런 분께:</strong> 새로운 작가를 발견하고 싶다면</blockquote>
+                    
+                    <h3>5. 『불편한 편의점』 — 김호연</h3>
+                    <p>힐링 소설의 대명사. 부담 없이 읽기 딱 좋아요.</p>
+                    <blockquote>💡 <strong>이런 분께:</strong> 머리 비우고 가볍게 읽고 싶다면</blockquote>
+                    <hr>
+                    
+                    <h2>📘 비소설 5권 — 다시 움직일 힘이 필요할 때</h2>
+                    
+                    <h3>1. 『거인의 노트』 — 김익한</h3>
+                    <p>대한민국 1호 기록학자의 스테디셀러. 새해 목표가 흐지부지됐다면 이 책으로 다시 시작해보세요.</p>
+                    <blockquote>💡 <strong>이런 분께:</strong> 작심삼일 반복 중이라면</blockquote>
+                    
+                    <h3>2. 『단 한 번의 삶』 — 김영하</h3>
+                    <p>2025년 주요 서점 1위를 휩쓴 김영하 에세이.</p>
+                    <blockquote>💡 <strong>이런 분께:</strong> 에세이 좋아하고, 김영하 팬이라면</blockquote>
+                    
+                    <h3>3. 『그릿(Grit)』 — 앤절라 더크워스</h3>
+                    <p>"재능보다 끈기"라는 메시지의 고전. 아직 2월이에요, 다시 시작하면 됩니다.</p>
+                    <blockquote>💡 <strong>이런 분께:</strong> 새해 결심이 벌써 무너졌다면</blockquote>
+                    
+                    <h3>4. 『트렌드 코리아 2026』 — 김난도</h3>
+                    <p>올해 뭐가 뜨는지 한눈에 파악할 수 있는 책.</p>
+                    <blockquote>💡 <strong>이런 분께:</strong> 요즘 뭐가 핫한지 궁금하다면</blockquote>
+                    
+                    <h3>5. 『요리를 한다는 것』 — 최강록</h3>
+                    <p>요리에 대한 에세이지만, 결국 삶에 대한 이야기.</p>
+                    <blockquote>💡 <strong>이런 분께:</strong> 일상 속 작은 행복을 찾고 싶다면</blockquote>
+                    <hr>
+                    
+                    <h2>✨ 마무리</h2>
+                    <p>설 연휴 끝나고 바로 풀가동할 필요 없어요.</p>
+                    <p><strong>책 한 권 들고, 커피 한 잔 마시면서, 천천히 일상으로 돌아오세요.</strong></p>
+                    <p>10권 다 읽을 필요도 없고, 이 중 <strong>딱 1권</strong>만 골라서 읽어도 충분합니다.</p>
+                    <p><em>당신의 2월이 책과 함께 따뜻하길 바랍니다.</em> 📖</p>
+                `
+            },
+            cardnews: {
+                title: '📱 카드뉴스: 설 연휴 후 읽기 좋은 책 10권',
+                content: `
+                    <h1>📱 카드뉴스: 설 연휴 후 읽기 좋은 책 10권</h1>
+                    <p><strong>형식:</strong> 인스타그램 캐러셀 (10장)<br>
+                    <strong>사이즈:</strong> 1080x1350px 권장</p>
+                    <hr>
+                    
+                    <h2>슬라이드 1 (표지)</h2>
+                    <pre>🎨 배경: 그라데이션 (연보라 → 베이지)
+
+📚 설 연휴 끝!
+무기력할 때 읽으면 좋은 책
+
+소설 5권 + 비소설 5권
+→ 스와이프해서 확인하세요</pre>
+                    
+                    <h2>슬라이드 2 (소설 인트로)</h2>
+                    <pre>🎨 배경: 따뜻한 베이지
+
+📖 소설 5권
+마음의 휴식이 필요할 때
+
+"머리 복잡할 땐 
+소설 한 권이 약이에요"</pre>
+                    
+                    <h2>슬라이드 3 (소설 1-2)</h2>
+                    <pre>1️⃣ 소년이 온다 - 한강
+   → 노벨문학상 수상작
+   → 묵직한 정화
+
+2️⃣ 안녕이라 그랬어 - 김애란
+   → 2025 올해의 소설 1위
+   → 따뜻한 위로</pre>
+                    
+                    <h2>슬라이드 4 (소설 3-5)</h2>
+                    <pre>3️⃣ 괴테는 모든 것을 말했다
+   → 아쿠타가와상 수상작
+
+4️⃣ 절창 - 구병모
+   → 2026 주목 신작
+
+5️⃣ 불편한 편의점 - 김호연
+   → 힐링 소설 대명사</pre>
+                    
+                    <h2>슬라이드 5 (비소설 인트로)</h2>
+                    <pre>🎨 배경: 민트/그린 계열
+
+📘 비소설 5권
+다시 움직일 힘이 필요할 때
+
+"새해 목표 흐지부지?
+아직 2월이에요 👊"</pre>
+                    
+                    <h2>슬라이드 6-7 (비소설 목록)</h2>
+                    <pre>1️⃣ 거인의 노트 - 작심삼일 탈출
+2️⃣ 단 한 번의 삶 - 2025 베스트 에세이
+3️⃣ 그릿 - 재능보다 끈기
+4️⃣ 트렌드 코리아 2026 - 올해 트렌드
+5️⃣ 요리를 한다는 것 - 일상 힐링</pre>
+                    
+                    <h2>슬라이드 8-9 (요약 Pick)</h2>
+                    <pre>📖 소설 Pick
+💜 위로가 필요하면 → 안녕이라 그랬어
+💜 깊이 있게 읽고 싶으면 → 소년이 온다
+💜 가볍게 힐링 → 불편한 편의점
+
+📘 비소설 Pick
+💚 습관을 바꾸고 싶으면 → 거인의 노트
+💚 동기부여가 필요하면 → 그릿
+💚 트렌드 파악 → 트렌드 코리아 2026</pre>
+                    
+                    <h2>슬라이드 10 (마무리)</h2>
+                    <pre>설 연휴 끝나고
+바로 풀가동 안 해도 돼요 ☕
+
+책 한 권 들고
+천천히 일상으로 돌아오세요
+
+📚 이 중 딱 1권만 읽어도 충분!
+
+💾 저장해두고 서점 갈 때 참고하세요
+❤️ 도움됐다면 좋아요!</pre>
+                    <hr>
+                    
+                    <h2>📌 해시태그</h2>
+                    <p><code>#책추천 #설연휴 #독서 #책스타그램 #북스타그램 #소설추천 #자기계발 #힐링 #베스트셀러 #2월추천 #한강 #김애란 #김영하 #불편한편의점 #그릿</code></p>
+                    
+                    <h2>🎨 디자인 가이드</h2>
+                    <p><strong>컬러 팔레트:</strong></p>
+                    <ul>
+                        <li>소설: #E8D5F2 (연보라), #F5E6D3 (베이지)</li>
+                        <li>비소설: #D4F1E8 (민트), #E8F4F0 (연그린)</li>
+                        <li>텍스트: #2D2D2D (다크그레이)</li>
+                    </ul>
+                    <p><strong>폰트:</strong> 프리텐다드 Bold/Regular<br>
+                    <strong>스타일:</strong> 미니멀, 깔끔, 여백 충분히</p>
+                `
+            }
+        };
+        
+        let currentDocKey = '';
+        
+        function showDocModal(docKey) {
+            const doc = documents[docKey];
+            if (doc) {
+                currentDocKey = docKey;
+                document.getElementById('docModalTitle').textContent = doc.title;
+                document.getElementById('docModalContent').innerHTML = doc.content;
+                document.getElementById('docModal').classList.add('active');
+            }
+        }
+        
+        function copyDocContent() {
+            const content = document.getElementById('docModalContent').innerText;
+            navigator.clipboard.writeText(content).then(() => {
+                alert('📋 클립보드에 복사되었습니다!');
+            });
+        }
     </script>
 </body>
 </html>
